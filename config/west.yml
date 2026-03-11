@@ -1,11 +1,11 @@
 manifest:
   remotes:
     - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
+      url-base: https://github.com/zmkfirmware/zmk
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: main
+      revision: main   # 确保这里是 main 或者是最新的 tag
       import: app/west.yml
   self:
     path: config

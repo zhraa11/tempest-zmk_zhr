@@ -23,8 +23,8 @@ See the main [TEMPEST](https://github.com/thrly/tempest) keyboard repo for hardw
 7. For each half of the keyboard:
    1. Connect the _left_ side of the keyboard to your PC, press the reset button twice.
    2. Your file explorer should open your keyboard's mass storage folder.
-   3. Drag and drop `tempest_left-nice_nano-zmk.uf2` to the MCU folder
-   4. Now repeat this process for the _right_ side of Tempest with `tempest_right-nice_nano-zmk.uf2`
+   3. Drag and drop `tempest_left-nice_nano_v2-zmk.uf2` to the MCU folder
+   4. Now repeat this process for the _right_ side of Tempest with `tempest_right-nice_nano_v2-zmk.uf2`
 
 ### _Alternative_: quickstart with the pre-build keymap
 

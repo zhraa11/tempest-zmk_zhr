@@ -1,6 +1,37 @@
-name: Build ZMK firmware
+name: Build Stable
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-22.04  # 使用旧版系统镜像，环境更稳定
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install West
+        run: pip3 install west==1.2.0  # 强制安装旧版 west，避免 'qualifiers' 错误
+
+      - name: West Init
+        run: west init -l config
+
+      - name: West Update
+        run: west update
+
+      - name: West Export
+        run: west zephyr-export
+
+      - name: Build Left
+        run: |
+          west build -s zmk/app -b nice_nano -- -DSHIELD=tempest_left -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+          mv build/zephyr/zmk.uf2 tempest_left.uf2
+
+      - name: Build Right
+        run: |
+          west build -p always -s zmk/app -b nice_nano -- -DSHIELD=tempest_right -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+          mv build/zephyr/zmk.uf2 tempest_right.uf2
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: tempest_firmware
+          path: "*.uf2"

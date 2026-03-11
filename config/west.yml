@@ -5,7 +5,7 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: main   # 确保这里是 main 或者是最新的 tag
+      revision: main
       import: app/west.yml
   self:
     path: config
